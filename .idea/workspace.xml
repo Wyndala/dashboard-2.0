@@ -57,16 +57,16 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="style.css" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="style.css" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="20" selection-start="382" selection-end="382" vertical-scroll-proportion="0.0">
+            <state line="21" column="14" selection-start="419" selection-end="419" vertical-scroll-proportion="0.6445672">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Custom_ungit.xml" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Custom_ungit.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$USER_HOME$/.WebIde60/config/commandlinetools/Custom_ungit.xml">
           <provider selected="true" editor-type-id="text-editor">
             <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
@@ -78,7 +78,7 @@
       <file leaf-file-name="functions.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/functions.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="41" column="0" selection-start="1124" selection-end="1124" vertical-scroll-proportion="0.0">
+            <state line="112" column="19" selection-start="3630" selection-end="3630" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -87,7 +87,7 @@
       <file leaf-file-name="class.Tile.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/class.Tile.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="84" selection-start="509" selection-end="509" vertical-scroll-proportion="0.0">
+            <state line="18" column="52" selection-start="411" selection-end="411" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -127,6 +127,7 @@
       <command text="b install" />
       <command text="npm install ungit -g" />
       <command text="npm install -g ungit" />
+      <command text="ungit" />
       <command text="ungit" />
     </commandsHistory>
   </component>
@@ -528,30 +529,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$USER_HOME$/.WebIde60/config/commandlinetools/Custom_ungit.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/class.Tile.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="84" selection-start="509" selection-end="509" vertical-scroll-proportion="0.0">
+        <state line="18" column="52" selection-start="411" selection-end="411" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/functions.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="0" selection-start="1124" selection-end="1124" vertical-scroll-proportion="0.0">
+        <state line="112" column="19" selection-start="3630" selection-end="3630" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="20" selection-start="382" selection-end="382" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.WebIde60/config/commandlinetools/Custom_ungit.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+        <state line="21" column="14" selection-start="419" selection-end="419" vertical-scroll-proportion="0.6445672">
           <folding />
         </state>
       </provider>

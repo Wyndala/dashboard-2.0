@@ -19,7 +19,7 @@ var Tile = new Class({
         var content = new Element('div', {'class': 'content'});
 
 
-        var img = new Element('img', {'src': 'http://lorempixel.com/1024/1024/people/Dummy-Text?'+Math.random()});
+        var img = new Element('img', {'src': 'http://lorempixel.com/800/800/people/Dummy-Text?'+Math.random()});
         img.inject(content);
         content.inject(this.element);
         this.element.setStyles({top: y, left: x});

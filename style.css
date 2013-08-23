@@ -19,14 +19,14 @@ html,body {
     position: absolute;
     cursor: pointer;
     overflow: hidden;
-    padding: 10px;
+    padding: 5px;
 }
 
 .tile .content{
     box-shadow: 0 0 10px rgba(68,68,68,0.5);
     overflow: hidden;
-    height: 95%;
-    width: 95%;
+    height: 100%;
+    width: 100%;
 }
 
 .tile img:hover {

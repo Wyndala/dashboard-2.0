@@ -6,7 +6,7 @@
  * To change this template use File | Settings | File Templates.
  */
 window.addEvent('domready', function() {
-    tileCount = 16;
+    tileCount = 64;
     tiles = [];
     tileList = [];
     container = $$('.container')[0];
@@ -15,8 +15,8 @@ window.addEvent('domready', function() {
     $$('.tile').addEvent('click', function() {
 
         if (this.getStyle('width').toInt() <= Math.ceil(tileWidth)) {
-            var newWidth = tileWidth * 2.5;
-            var newHeight = tileWidth * 2.5;
+            var newWidth = window.getSize().x / 2;
+            var newHeight = window.getSize().y / 1.5;
 
         } else {
             var newWidth = tileWidth;
@@ -109,6 +109,8 @@ function actualizeTiles() {
 
         var tile = tileList[it];
         tiles[x][y] = tile;
+        tile.x = x;
+        tile.y = y;
         tileList.push(tile);
         left =  i * tileWidth;
         tile.element.setStyles({width: tileWidth, height: tileWidth, top: top, left: left});
