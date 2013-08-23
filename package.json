@@ -1,0 +1,12 @@
+{
+  "name": "Dashboard2.0",
+  "version": "0.0.1",
+  "description": "A metro style web interface for blogs, widgets etc.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "",
+  "author": "Ralf Michael",
+  "license": "BSD"
+}

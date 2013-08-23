@@ -1,0 +1,11 @@
+{
+  "name": "mootools",
+  "_cacheHeaders": {
+    "Last-Modified": "Thu, 20 Dec 2012 07:45:03 GMT",
+    "Content-Type": "application/javascript"
+  },
+  "main": "index.js",
+  "_source": "http://cdnjs.cloudflare.com/ajax/libs/mootools/1.4.5/mootools-core-full-compat-yc.js",
+  "_target": "*",
+  "_originalSource": "http://cdnjs.cloudflare.com/ajax/libs/mootools/1.4.5/mootools-core-full-compat-yc.js"
+}

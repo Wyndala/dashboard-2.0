@@ -1,0 +1,11 @@
+{
+  "name": "mootools-more",
+  "_cacheHeaders": {
+    "Last-Modified": "Wed, 17 Oct 2012 09:45:03 GMT",
+    "Content-Type": "application/javascript"
+  },
+  "main": "index.js",
+  "_source": "http://cdnjs.cloudflare.com/ajax/libs/mootools-more/1.4.0.1/mootools-more-yui-compressed.js",
+  "_target": "*",
+  "_originalSource": "http://cdnjs.cloudflare.com/ajax/libs/mootools-more/1.4.0.1/mootools-more-yui-compressed.js"
+}

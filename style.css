@@ -1,0 +1,55 @@
+html,body {
+    height: 100%;
+    width: 100%;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+}
+
+.tile {
+    transition: top 1s ease-in-out, left 1s ease-in-out, height 1s ease-in-out, width 1s ease-in-out;
+    border-radius: 5px;
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    cursor: pointer;
+    overflow: hidden;
+    padding: 10px;
+}
+
+.tile .content{
+    box-shadow: 0 0 10px rgba(68,68,68,0.5);
+    overflow: hidden;
+    height: 95%;
+    width: 95%;
+}
+
+.tile img:hover {
+    opacity: 0.5;
+}
+
+.tile img {
+    height: 100%;
+    width: 100%;
+    max-width: none;
+    max-height: none;
+}
+
+.tile.quer img {
+    height: auto;
+    width: 100%;
+    max-width: none;
+    max-height: none;
+}
+
+.tile.hoch img {
+    height: 100%;
+    width: auto;
+    max-width: none;
+    max-height: none;
+}
