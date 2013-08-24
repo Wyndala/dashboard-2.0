@@ -18,10 +18,37 @@ var Tile = new Class({
         this.element = new Element('div', {'class': 'tile'});
 
         this.setContent();
+        var anfasser = new Element('div', {'class': 'anfasser'});
 
+        anfasser.inject(this.element);
         this.element.setStyles({top: y, left: x});
         this.element.inject($$('.container')[0]);
+
+
         this.element.store('tileObj', this);
+
+        var myDrag = new Drag(anfasser, {
+                stopPropagation: true,
+                preventDefault: true,
+                onStart: function(element) {
+                    var droppable = element.getParent('.tile').retrieve('tileObj');
+                    droppable.dragged = true;
+                },
+                onDrag : function(element, event){
+                    var droppable = element.getParent('.tile').retrieve('tileObj');
+
+                    var diffX = element.getPosition().x - droppable.element.getPosition().x;
+                    var diffY = element.getPosition().y - droppable.element.getPosition().y;
+                    window.tb.changeTileWidth(droppable, diffX + 10, diffY + 10);
+                    //console.log()
+                },
+                onComplete: function(element) {
+                    //var droppable = element.getParent('.tile').retrieve('tileObj');
+                    //droppable.dragged = false;
+                    element.setStyles({left: null, top: null});
+                }
+
+        });
     },
 
     setContent: function() {

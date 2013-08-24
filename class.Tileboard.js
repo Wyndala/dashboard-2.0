@@ -15,6 +15,7 @@ var Tileboard = new Class({
 
     initialize: function() {
         this.container = $$('.container')[0];
+        window.tb = this;
         this.initTiles();
         var tileboard = this;
         $$('.tile').addEvent('click', function() {
@@ -27,7 +28,12 @@ var Tileboard = new Class({
                 var newWidth = tileboard.tileWidth;
                 var newHeight = tileboard.tileWidth;
             }
-            tileboard.changeTileWidth(this.retrieve('tileObj'), newWidth, newHeight);
+            if (!this.retrieve('tileObj').dragged) {
+                tileboard.changeTileWidth(this.retrieve('tileObj'), newWidth, newHeight);
+            } else {
+                this.retrieve('tileObj').dragged = false;
+                console.log(this.retrieve('tileObj').dragged );
+            }
         });
 
         window.addEvent('resize', function() {

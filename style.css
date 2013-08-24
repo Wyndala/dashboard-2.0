@@ -22,6 +22,16 @@ html,body {
     padding: 5px;
 }
 
+.anfasser {
+    background: #0069D6;
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    height: 8px;
+    width: 8px;
+    z-index: 100;
+}
+
 .tile .content{
     box-shadow: 0 0 10px rgba(68,68,68,0.5);
     overflow: hidden;
