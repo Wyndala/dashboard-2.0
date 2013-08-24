@@ -6,24 +6,8 @@
  * To change this template use File | Settings | File Templates.
  */
 window.addEvent('domready', function() {
-    tileCount = 64;
-    tiles = [];
-    tileList = [];
-    container = $$('.container')[0];
-    margin = 10;
-    initTiles();
-    $$('.tile').addEvent('click', function() {
+    new Tileboard();
 
-        if (this.getStyle('width').toInt() <= Math.ceil(tileWidth)) {
-            var newWidth = window.getSize().x / 2;
-            var newHeight = window.getSize().y / 1.5;
-
-        } else {
-            var newWidth = tileWidth;
-            var newHeight = tileWidth;
-        }
-        changeTileWidth(this.retrieve('tileObj'), newWidth, newHeight);
-    });
 /*
     $$('.tile').addEvent('mouseover', function() {
 
@@ -40,9 +24,7 @@ window.addEvent('domready', function() {
 
 });
 
-window.addEvent('resize', function() {
-    actualizeTiles();
-});
+
 
 function changeTileWidth(tile, newWidth, newHeight) {
     var diffNewOldWidth = newWidth - tileWidth;
