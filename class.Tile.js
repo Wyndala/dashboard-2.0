@@ -76,8 +76,9 @@ var FeedTile = new Class({
 
 
         var h2 = new Element('h2', {'text': this.entry.title});
-        var entryContent = new Element('h2', {'html': this.entry.content});
+        var entryContent = new Element('div', {'html': this.entry.content});
         h2.inject(content);
+        entryContent.inject(content);
         content.inject(this.element);
     }
 });
