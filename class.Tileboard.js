@@ -1,28 +1,54 @@
 /**
- * Created with JetBrains PhpStorm.
- * User: Ralf Michael
- * Date: 24.08.13
- * Time: 15:54
- * To change this template use File | Settings | File Templates.
+ * Tileboard for a lot of content
+ * @author Ralf Michael
+ * @type {Class}
  */
 
 var Tileboard = new Class({
+    Implements: Options,
     tileCount: 8,
     tiles: [],
     tileList: [],
     container: null,
     margin: 10,
+    options: {
+        cssOptions: {
+            'tileClass': '.tile',
+            'containerClass': '.container'
+        },
+        tileObject: 'Tile',
+        tileOptions: {},
+        entries: {},
+        entryUrl: ''
+    },
+    /**
+     * Constructor of the Tileboard Class
+     */
+    initialize: function(options) {
+        this.setOptions(options);
+        this.container = $$(this.options.cssOptions.containerClass)[0];
+        if (this.options.entryUrl.length) {
+            this.getEntries(this.options.entryUrl, function(data) {
+                this.tileCount = data.responseData.feed.entries.length;
+                this.options.entries = data.responseData.feed.entries;
+                this.initTiles();
+                this.addEvents();
+            }.bind(this));
+        } else {
+            this.initTiles();
+            this.addEvents();
+        }
 
-    initialize: function() {
-        this.container = $$('.container')[0];
-        window.tb = this;
-        this.initTiles();
+
+    },
+
+    addEvents: function() {
         var tileboard = this;
-        $$('.tile').addEvent('click', function() {
+        $$(this.options.cssOptions.tileClass).addEvent('click', function() {
 
             if (this.getStyle('width').toInt() <= Math.ceil(tileboard.tileWidth)) {
-                var newWidth = window.getSize().x / 2;
-                var newHeight = window.getSize().y / 1.5;
+                var newWidth = tileboard.tileWidth * 2;
+                var newHeight = tileboard.tileWidth * 1;
 
             } else {
                 var newWidth = tileboard.tileWidth;
@@ -32,7 +58,6 @@ var Tileboard = new Class({
                 tileboard.changeTileWidth(this.retrieve('tileObj'), newWidth, newHeight);
             } else {
                 this.retrieve('tileObj').dragged = false;
-                console.log(this.retrieve('tileObj').dragged );
             }
         });
 
@@ -41,6 +66,12 @@ var Tileboard = new Class({
         });
     },
 
+    /**
+     * Changes the width and height of a given Tile
+     * @param {Tile} tile
+     * @param {Number] newWidth
+     * @param {Number] newHeight
+     */
     changeTileWidth: function(tile, newWidth, newHeight) {
         var diffNewOldWidth = newWidth - this.tileWidth;
         var diffNewOldHeight = newHeight - this.tileWidth;
@@ -54,30 +85,19 @@ var Tileboard = new Class({
         for (var yIt = 0;yIt < this.rows; yIt++) {
             for (var xIt = 0;xIt < columns; xIt++) {
                 if (typeof this.tiles[xIt][yIt] != 'undefined') {
-                    if (tile.x == xIt && tile.y == yIt) {
+                    if (tile.getX() == xIt && tile.getY() == yIt) {
                         tile.element.setStyles({width: newWidth, height: newHeight, left: rightEnd, top: bottomEnd});
                         rightEnd += newWidth;
-                    } else if (yIt == tile.y) {
+                    } else if (yIt == tile.getY()) {
                         this.tiles[xIt][yIt].element.setStyles({width: newRightColumnWidth, height: newHeight, left: rightEnd, top: bottomEnd});
                         rightEnd += newRightColumnWidth;
 
                     } else {
                         this.tiles[xIt][yIt].element.setStyles({height: newBottomRowHeight, top: bottomEnd});
                     }
-
-                    if (this.tiles[xIt][yIt].element.getStyle('width').toInt() > this.tiles[xIt][yIt].element.getStyle('height').toInt()) {
-                        this.tiles[xIt][yIt].element.removeClass('hoch');
-                        this.tiles[xIt][yIt].element.addClass('quer');
-                    } else if (this.tiles[xIt][yIt].element.getStyle('width').toInt() < this.tiles[xIt][yIt].element.getStyle('height').toInt()){
-                        this.tiles[xIt][yIt].element.removeClass('quer');
-                        this.tiles[xIt][yIt].element.addClass('hoch');
-                    } else {
-                        this.tiles[xIt][yIt].element.removeClass('quer');
-                        this.tiles[xIt][yIt].element.addClass('hoch');
-                    }
                 }
             }
-            if (tile.y == yIt) {
+            if (tile.getY() == yIt) {
                 bottomEnd += newHeight;
             } else {
                 bottomEnd += newBottomRowHeight;
@@ -103,11 +123,10 @@ var Tileboard = new Class({
                 y++;
             }
 
-
             var tile = this.tileList[it];
             this.tiles[x][y] = tile;
-            tile.x = x;
-            tile.y = y;
+            tile.setX(x);
+            tile.setY(y);
 
             left =  i * this.tileWidth;
             tile.element.setStyles({width: this.tileWidth, height: this.tileWidth, top: top, left: left});
@@ -138,8 +157,12 @@ var Tileboard = new Class({
                 y++;
             }
 
+            var tile = new window[this.options.tileClass]({
+                x: x,
+                y: y,
+                entry: this.options.entries[it]
+            });
 
-            var tile = new Tile(x, y);
             this.tiles[x][y] = tile;
             this.tileList.push(tile);
             left =  i * this.tileWidth;
@@ -181,11 +204,6 @@ var Tileboard = new Class({
 
 
             calculatedHeight = tempTileWidth * tempRows;
-            console.log(calculatedHeight < possibleHeight);
-            console.log(calculatedHeight);
-            console.log(tempTileWidth);
-            console.log(overlappingTiles + ' / ' + tempTileCount);
-            console.log(this.rows);
         }
 
         return tileWidth;
@@ -195,6 +213,18 @@ var Tileboard = new Class({
         for (var i=0; i < columns; i++) {
             this.tiles[i] = [];
         }
+    },
+
+    getEntries: function(url, callback) {
+        this.getJSONP('https://ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=16&q=' + url + '&callback=?', function(data){
+            if (typeof callback == 'function') {
+                callback(data);
+            }
+        });
+    },
+
+    destroy: function() {
+
     },
 
     getJSONP: function(url, success) {

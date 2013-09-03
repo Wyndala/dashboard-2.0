@@ -7,48 +7,26 @@
  */
 
 var Tile = new Class({
+    Implements: Options,
+    options: {
+        x: 0,
+        y: 0,
+        entry: null
+    },
 
-    x: 0,
-    y: 0,
     element: null,
 
-    initialize: function(x, y) {
-        this.x = x;
-        this.y = y;
+    initialize: function(options) {
+        this.setOptions(options);
         this.element = new Element('div', {'class': 'tile'});
 
         this.setContent();
-        var anfasser = new Element('div', {'class': 'anfasser'});
 
-        anfasser.inject(this.element);
-        this.element.setStyles({top: y, left: x});
+        this.element.setStyles({top: this.options.y, left: this.options.x});
         this.element.inject($$('.container')[0]);
 
 
         this.element.store('tileObj', this);
-
-        var myDrag = new Drag(anfasser, {
-                stopPropagation: true,
-                preventDefault: true,
-                onStart: function(element) {
-                    var droppable = element.getParent('.tile').retrieve('tileObj');
-                    droppable.dragged = true;
-                },
-                onDrag : function(element, event){
-                    var droppable = element.getParent('.tile').retrieve('tileObj');
-
-                    var diffX = element.getPosition().x - droppable.element.getPosition().x;
-                    var diffY = element.getPosition().y - droppable.element.getPosition().y;
-                    window.tb.changeTileWidth(droppable, diffX + 10, diffY + 10);
-                    //console.log()
-                },
-                onComplete: function(element) {
-                    //var droppable = element.getParent('.tile').retrieve('tileObj');
-                    //droppable.dragged = false;
-                    element.setStyles({left: null, top: null});
-                }
-
-        });
     },
 
     setContent: function() {
@@ -58,25 +36,71 @@ var Tile = new Class({
         var img = new Element('img', {'src': 'http://lorempixel.com/800/800/people/Dummy-Text?'+Math.random()});
         img.inject(content);
         content.inject(this.element);
+    },
+
+    getCoordinates: function() {
+        return {x: this.options.x, y: this.options.y}
+    },
+
+    getX: function() {
+        return this.options.x;
+    },
+
+    getY: function() {
+        return this.options.y;
+    },
+
+    setX: function(x) {
+        this.options.x = x;
+    },
+
+    setY: function(y) {
+        this.options.y = y;
+    },
+
+    getEntry: function() {
+        return this.options.entry
     }
 
 });
 
 var FeedTile = new Class({
     Extends: Tile,
-    entry: null,
 
-    initialize: function(x, y, entry) {
-        this.parent(x,y);
-        this.entry = entry;
+    initialize: function(options) {
+        this.parent(options);
+        this.element.addClass('feed');
     },
 
     setContent: function() {
         var content = new Element('div', {'class': 'content'});
 
+        var entry = this.getEntry();
+        var h2 = new Element('h2', {'text': entry.title});
+        var entryContent = new Element('div', {'html': entry.content});
+        var entryLink = new Element('a', {'href': entry.link, 'text': 'Zum Artikel', 'target': '_blank'});
+        h2.inject(content);
+        entryContent.inject(content);
+        entryLink.inject(content);
+        content.inject(this.element);
+    }
+});
 
-        var h2 = new Element('h2', {'text': this.entry.title});
-        var entryContent = new Element('div', {'html': this.entry.content});
+var MenuTile = new Class({
+    Extends: Tile,
+    entry: null,
+
+    initialize: function(options) {
+        this.parent(options);
+        this.element.addClass('menu');
+    },
+
+    setContent: function() {
+        var content = new Element('div', {'class': 'content'});
+
+        var entry = this.getEntry();
+        var h2 = new Element('h2', {'text': entry.title});
+        var entryContent = new Element('div', {'html': entry.content});
         h2.inject(content);
         entryContent.inject(content);
         content.inject(this.element);
